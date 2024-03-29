@@ -1141,7 +1141,7 @@ bool Player::Ghost_t::isControllable()
 	{
 		return true;
 	}
-	return false;
+	return true;
 }
 
 void Player::Ghost_t::pauseMenuSpectate(const int player)
@@ -1476,7 +1476,12 @@ int Player::Ghost_t::getSpriteForPlayer(const int player)
 {
 	if ( !colorblind_lobby )
 	{
-		return ((player < 4) ? (GHOST_MODEL_P1 + player) : GHOST_MODEL_PX);
+		int var = player;
+		if (var > 4)
+		{
+			var += 7;
+		}
+		return GHOST_MODEL_P1 + var;//((player < 8) ? (GHOST_MODEL_P1 + player) : GHOST_MODEL_PX);
 	}
 	Uint32 index = 4;
 	switch ( player )
@@ -1690,6 +1695,14 @@ void actDeathGhost(Entity* my)
 			case Player::Ghost_t::GHOST_MODEL_P4:
 				light_type = "ghost_pink";
 				break;
+			case Player::Ghost_t::GHOST_MODEL_P5:
+				light_type = "ghost_blue";
+				break;
+			case Player::Ghost_t::GHOST_MODEL_P6:
+				light_type = "ghost_orange";
+				break;
+			case Player::Ghost_t::GHOST_MODEL_P7:
+				light_type = "ghost_pink2";
 			default:
 				light_type = "ghost_white";
 				break;

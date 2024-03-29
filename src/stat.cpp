@@ -1481,7 +1481,7 @@ Uint32 Stat::getLootingBagKey(const int player)
 	Uint32 lootingBagKey = player & 0xF;
 	Uint16 levelKey = currentlevel & 0xFFF;
 	levelKey |= ((secretlevel ? 1 : 0) << 11);
-	lootingBagKey |= (levelKey << 4);
+	lootingBagKey |= (levelKey << 8);
 
 	return lootingBagKey;
 }

@@ -1219,6 +1219,36 @@ void serverUpdatePlayerLVL()
 	}
 }
 
+void serverUpdatePlayerLVL2()
+{
+	int c;
+	if (multiplayer != SERVER)
+	{
+		return;
+	}
+	for (c = 1; c < MAXPLAYERS; c++)
+	{
+		if (client_disconnected[c] || players[c]->isLocalPlayer())
+		{
+			continue;
+		}
+		strcpy((char*)net_packet->data, "ULV2");
+		Sint32 playerLevels = 0;
+		for (int i = 4; i < 8; ++i)
+		{
+			if (stats[i])
+			{
+				playerLevels |= static_cast<Uint8>(stats[i]->LVL) << (8 * (i - 4)); // store uint8 in data, highest bits for player 4.
+			}
+		}
+		SDLNet_Write32(playerLevels, &net_packet->data[4]);
+		net_packet->address.host = net_clients[c - 1].host;
+		net_packet->address.port = net_clients[c - 1].port;
+		net_packet->len = 8;
+		sendPacketSafe(net_sock, -1, net_packet, c - 1);
+	}
+}
+
 void serverRemoveClientFollower(int player, Uint32 uidToRemove)
 {
 	if ( multiplayer != SERVER || player <= 0 )
@@ -1888,7 +1918,11 @@ void clientActions(Entity* entity)
 		case Player::Ghost_t::GHOST_MODEL_P2:
 		case Player::Ghost_t::GHOST_MODEL_P3:
 		case Player::Ghost_t::GHOST_MODEL_P4:
-		case Player::Ghost_t::GHOST_MODEL_PX:
+		case Player::Ghost_t::GHOST_MODEL_P5:
+		case Player::Ghost_t::GHOST_MODEL_P6:
+		case Player::Ghost_t::GHOST_MODEL_P7:
+		case Player::Ghost_t::GHOST_MODEL_P8:
+		
 			// player ghosts
 			playernum = SDLNet_Read32(&net_packet->data[30]);
 			if ( playernum >= 0 && playernum < MAXPLAYERS )
@@ -4158,6 +4192,13 @@ static std::unordered_map<Uint32, void(*)()> clientPacketHandlers = {
 			stats[i]->LVL = static_cast<Sint32>((buffer >> (i * 8) ) & 0xFF);
 		}
 	}},
+	{ 'ULV2', []() {
+		Sint32 buffer = SDLNet_Read32(&net_packet->data[4]);
+		for (int i = 4; i < 8; ++i)
+		{
+			stats[i]->LVL = static_cast<Sint32>((buffer >> (i * 8)) & 0xFF);
+		}
+	} },
 
 	// level change
 	{'LVLC', [](){
@@ -5062,6 +5103,7 @@ void clientHandlePacket()
 		{
 			int sprite = 0;
 			Uint32 uidpacket = static_cast<Uint32>(SDLNet_Read32(&net_packet->data[4]));
+			printlog("uidpacket is %d", uidpacket);
 			if ( uidToEntity(uidpacket) )
 			{
 				sprite = uidToEntity(uidpacket)->sprite;

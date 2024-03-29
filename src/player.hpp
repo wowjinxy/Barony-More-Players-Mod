@@ -1818,7 +1818,10 @@ public:
 		static const int GHOST_MODEL_P2 = 1239;
 		static const int GHOST_MODEL_P3 = 1240;
 		static const int GHOST_MODEL_P4 = 1241;
-		static const int GHOST_MODEL_PX = 1242;
+		static const int GHOST_MODEL_P5 = 1242;
+		static const int GHOST_MODEL_P6 = 1250;
+		static const int GHOST_MODEL_P7 = 1251;
+		static const int GHOST_MODEL_P8 = 1252;
 		static const int GHOST_SQUISH_START_ANGLE = 75;
 		static int getSpriteForPlayer(const int player);
 		void createBounceAnimate();

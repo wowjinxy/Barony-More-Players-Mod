@@ -942,7 +942,7 @@ Sint32 itemModel(const Item* const item)
 		if ( colorblind_lobby )
 		{
 			int playerOwner = item->getLootBagPlayer();
-			Uint32 index = 4;
+			Uint32 index = 8;
 			switch ( playerOwner )
 			{
 			case 0:
@@ -955,6 +955,18 @@ Sint32 itemModel(const Item* const item)
 				index = 1;
 				break;
 			case 3:
+				index = 8;
+				break;
+			case 4:
+				index = 7;
+				break;
+			case 5:
+				index = 6;
+				break;
+			case 6:
+				index = 5;
+				break;
+			case 7:
 				index = 4;
 				break;
 			default:

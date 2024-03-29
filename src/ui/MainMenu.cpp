@@ -14373,7 +14373,7 @@ failed:
 #ifdef NINTENDO
 		invite_label->setSize(SDL_Rect{ 82, height - 266, 122, 26 });
 #else
-		invite_label->setSize(SDL_Rect{ 82, height - 278, 122, 26 });
+		invite_label->setSize(SDL_Rect{ 82, height - 276, 122, 26 });
 #endif
 		invite_label->setFont(smallfont_outline);
 		invite_label->setText(Language::get(5393));
@@ -14382,7 +14382,7 @@ failed:
 			invite_label->setColor(makeColor(70, 62, 59, 255));
 
 			auto invite = card->addImage(
-				SDL_Rect{204, height - 278, 26, 26},
+				SDL_Rect{204, height - 276, 26, 26},
 				0xffffffff,
 				"*images/ui/Main Menus/sublist_item-locked.png",
 				"invite"
@@ -14394,7 +14394,7 @@ failed:
 #ifdef NINTENDO
 			invite->setSize(SDL_Rect{ 202, height - 268, 30, 30 });
 #else
-			invite->setSize(SDL_Rect{ 202, height - 280, 30, 30 });
+			invite->setSize(SDL_Rect{ 202, height - 278, 30, 30 });
 #endif
 			invite->setBackground("*images/ui/Main Menus/sublist_item-unpicked.png");
 			invite->setBackgroundHighlighted("*images/ui/Main Menus/sublist_item-unpickedHigh.png");
@@ -14477,7 +14477,7 @@ failed:
 
 #ifndef NINTENDO
 		auto friends_label = card->addField("friends_label", 64);
-		friends_label->setSize(SDL_Rect{82, height - 246, 122, 26});
+		friends_label->setSize(SDL_Rect{82, height - 244, 122, 26});
 		friends_label->setFont(smallfont_outline);
 		friends_label->setText(Language::get(5394));
 		friends_label->setJustify(Field::justify_t::CENTER);
@@ -14485,7 +14485,7 @@ failed:
 			friends_label->setColor(makeColor(70, 62, 59, 255));
 
 			auto friends = card->addImage(
-				SDL_Rect{204, height - 246, 26, 26},
+				SDL_Rect{204, height - 244, 26, 26},
 				0xffffffff,
 				"*images/ui/Main Menus/sublist_item-locked.png",
 				"friends"
@@ -14494,7 +14494,7 @@ failed:
 			friends_label->setColor(makeColor(166, 123, 81, 255));
 
 			auto friends = card->addButton("friends");
-			friends->setSize(SDL_Rect{202, height - 248, 30, 30});
+			friends->setSize(SDL_Rect{202, height - 246, 30, 30});
 			friends->setBackground("*images/ui/Main Menus/sublist_item-unpicked.png");
 			friends->setBackgroundHighlighted("*images/ui/Main Menus/sublist_item-unpickedHigh.png");
 			friends->setBackgroundActivated("*images/ui/Main Menus/sublist_item-unpickedPress.png");
@@ -14571,7 +14571,7 @@ failed:
 #ifdef NINTENDO
 		open_label->setSize(SDL_Rect{ 82, height - 226, 122, 26 });
 #else
-		open_label->setSize(SDL_Rect{ 82, height - 214, 122, 26 });
+		open_label->setSize(SDL_Rect{ 82, height - 212, 122, 26 });
 #endif
 		open_label->setFont(smallfont_outline);
 		open_label->setText(Language::get(5395));
@@ -14580,7 +14580,7 @@ failed:
 			open_label->setColor(makeColor(70, 62, 59, 255));
 
 			auto open = card->addImage(
-				SDL_Rect{204, height - 214, 26, 26},
+				SDL_Rect{204, height - 212, 26, 26},
 				0xffffffff,
 				"*images/ui/Main Menus/sublist_item-locked.png",
 				"open"
@@ -14672,7 +14672,7 @@ failed:
 		}
 
 		auto player_count_label = card->addField("player_count_label", 64);
-		player_count_label->setSize(SDL_Rect{40, height - 158, 116, 40});
+		player_count_label->setSize(SDL_Rect{40, 287, 116, 40});
 		player_count_label->setFont(smallfont_outline);
 		player_count_label->setText(Language::get(6018));
 		player_count_label->setJustify(Field::justify_t::CENTER);
@@ -14680,7 +14680,7 @@ failed:
         for (int c = 0; c < 3; ++c) {
             const std::string button_name = std::string("player_count_") + std::to_string(c + 2);
 		    auto player_count = card->addButton(button_name.c_str());
-		    player_count->setSize(SDL_Rect{156 + 44 * c, height - 158, 40, 40});
+		    player_count->setSize(SDL_Rect{189 + 33 * c, 277, 30, 30});
 		    player_count->setFont(smallfont_outline);
 		    player_count->setText(std::to_string(c + 2).c_str());
 		    player_count->setBorder(0);
@@ -14695,15 +14695,7 @@ failed:
 			player_count->addWidgetAction("MenuPageRightAlt", "chat");
 			player_count->addWidgetAction("MenuPageLeftAlt", "privacy");
 			player_count->setWidgetBack("back_button");
-			if ( index != 0 || gameModeManager.getMode() == GameModeManager_t::GAME_MODE_CUSTOM_RUN_ONESHOT
-				|| gameModeManager.getMode() == GameModeManager_t::GAME_MODE_CUSTOM_RUN )
-			{
-				player_count->setWidgetUp(online ? "open" : "seed");
-			}
-			else
-			{
-				player_count->setWidgetUp(online ? "open" : "custom_difficulty");
-			}
+			player_count->setWidgetUp(online ? "open" : "custom_difficulty");
 		    player_count->setWidgetLeft((std::string("player_count_") + std::to_string(c + 1)).c_str());
 		    player_count->setWidgetRight((std::string("player_count_") + std::to_string(c + 3)).c_str());
 		    player_count->setWidgetDown((std::string("kick_player_") + std::to_string(c + 2)).c_str());
@@ -14717,6 +14709,10 @@ failed:
 							lockSlot(1, false);
 							lockSlot(2, true);
 							lockSlot(3, true);
+							lockSlot(4, true);
+							lockSlot(5, true);
+							lockSlot(6, true);
+							lockSlot(7, true);
 							soundActivate();
 						} else {
 							if (!client_disconnected[2] && !client_disconnected[3]) {
@@ -14728,6 +14724,10 @@ failed:
 										lockSlot(1, false);
 										lockSlot(2, true);
 										lockSlot(3, true);
+										lockSlot(4, true);
+										lockSlot(5, true);
+										lockSlot(6, true);
+										lockSlot(7, true);
 										soundActivate();
 										closeBinary();
 										},
@@ -14744,6 +14744,10 @@ failed:
 										lockSlot(1, false);
 										lockSlot(2, true);
 										lockSlot(3, true);
+										lockSlot(4, true);
+										lockSlot(5, true);
+										lockSlot(6, true);
+										lockSlot(7, true);
 										soundActivate();
 										closeBinary();
 										},
@@ -14760,6 +14764,10 @@ failed:
 										lockSlot(1, false);
 										lockSlot(2, true);
 										lockSlot(3, true);
+										lockSlot(4, true);
+										lockSlot(5, true);
+										lockSlot(6, true);
+										lockSlot(7, true);
 										soundActivate();
 										closeBinary();
 										},
@@ -14777,6 +14785,10 @@ failed:
 							lockSlot(1, false);
 							lockSlot(2, false);
 							lockSlot(3, true);
+							lockSlot(4, true);
+							lockSlot(5, true);
+							lockSlot(6, true);
+							lockSlot(7, true);
 							soundActivate();
 						} else {
 							char prompt[1024];
@@ -14786,6 +14798,10 @@ failed:
 									lockSlot(1, false);
 									lockSlot(2, false);
 									lockSlot(3, true);
+									lockSlot(4, true);
+									lockSlot(5, true);
+									lockSlot(6, true);
+									lockSlot(7, true);
 									soundActivate();
 									closeBinary();
 									},
@@ -14793,7 +14809,7 @@ failed:
 									soundCancel();
 									closeBinary();
 									});
-						}
+								}
 						});
 					break;
 				case 2:
@@ -14801,112 +14817,308 @@ failed:
 						lockSlot(1, false);
 						lockSlot(2, false);
 						lockSlot(3, false);
+						lockSlot(4, true);
+						lockSlot(5, true);
+						lockSlot(6, true);
+						lockSlot(7, true);
+						soundActivate();
+						});
+					break;
+				
+
+				}
+			}
+        }
+		for (int k = 0; k < 4; ++k) {
+			const std::string button_name = std::string("player_count_") + std::to_string(k + 5);
+			auto player_count = card->addButton(button_name.c_str());
+			player_count->setSize(SDL_Rect{ 156 + 33 * k, 310, 30, 30 });
+			player_count->setFont(smallfont_outline);
+			player_count->setText(std::to_string(k + 5).c_str());
+			player_count->setBorder(0);
+			player_count->setTextColor(uint32ColorWhite);
+			player_count->setTextHighlightColor(uint32ColorWhite);
+			player_count->setBackground("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00A.png");
+			player_count->setBackgroundHighlighted("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00B_Highlighted.png");
+			player_count->setBackgroundActivated("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00C_Pressed.png");
+			player_count->setColor(uint32ColorWhite);
+			player_count->setWidgetSearchParent(name.c_str());
+			player_count->addWidgetAction("MenuStart", "confirm");
+			player_count->addWidgetAction("MenuPageRightAlt", "chat");
+			player_count->addWidgetAction("MenuPageLeftAlt", "privacy");
+			player_count->setWidgetBack("back_button");
+			player_count->setWidgetUp(online ? "open" : "custom_difficulty");
+			player_count->setWidgetLeft((std::string("player_count_") + std::to_string(k + 1)).c_str());
+			player_count->setWidgetRight((std::string("player_count_") + std::to_string(k + 3)).c_str());
+			player_count->setWidgetDown((std::string("kick_player_") + std::to_string(k + 2)).c_str());
+			if (index != 0) {
+				player_count->setCallback([](Button&) {soundError(); });
+			}
+			else {
+				switch (k) {
+				case 0:
+					player_count->setCallback([](Button&) {
+						lockSlot(1, false);
+						lockSlot(2, false);
+						lockSlot(3, false);
+						lockSlot(4, false);
+						lockSlot(5, true);
+						lockSlot(6, true);
+						lockSlot(7, true);
+						soundActivate();
+						});
+					break;
+				case 1:
+					player_count->setCallback([](Button&) {
+						lockSlot(1, false);
+						lockSlot(2, false);
+						lockSlot(3, false);
+						lockSlot(4, false);
+						lockSlot(5, false);
+						lockSlot(6, true);
+						lockSlot(7, true);
+						soundActivate();
+						});
+					break;
+				case 2:
+					player_count->setCallback([](Button&) {
+						lockSlot(1, false);
+						lockSlot(2, false);
+						lockSlot(3, false);
+						lockSlot(4, false);
+						lockSlot(5, false);
+						lockSlot(6, false);
+						lockSlot(7, true);
+						soundActivate();
+						});
+					break;
+				case 3:
+					player_count->setCallback([](Button&) {
+						lockSlot(1, false);
+						lockSlot(2, false);
+						lockSlot(3, false);
+						lockSlot(4, false);
+						lockSlot(5, false);
+						lockSlot(6, false);
+						lockSlot(7, false);
 						soundActivate();
 						});
 					break;
 				}
 			}
-        }
+		}
 
 		auto kick_player_label = card->addField("kick_player_label", 64);
-		kick_player_label->setSize(SDL_Rect{40, height - 114, 116, 40});
+		kick_player_label->setSize(SDL_Rect{40, 363, 116, 40});
 		kick_player_label->setFont(smallfont_outline);
 		kick_player_label->setText(Language::get(5402));
 		kick_player_label->setJustify(Field::justify_t::CENTER);
 
-        for (int c = 0; c < 3; ++c) {
-            const std::string button_name = std::string("kick_player_") + std::to_string(c + 2);
-		    auto kick_player = card->addButton(button_name.c_str());
-		    kick_player->setSize(SDL_Rect{156 + 44 * c, height - 114, 40, 40});
-		    kick_player->setFont(smallfont_outline);
-		    kick_player->setText(std::to_string(c + 2).c_str());
-		    kick_player->setBorder(0);
-		    kick_player->setTextColor(uint32ColorWhite);
-	        kick_player->setTextHighlightColor(uint32ColorWhite);
-		    kick_player->setBackground("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00A.png");
-		    kick_player->setBackgroundHighlighted("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00B_Highlighted.png");
-		    kick_player->setBackgroundActivated("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00C_Pressed.png");
-		    kick_player->setColor(uint32ColorWhite);
-		    kick_player->setWidgetSearchParent(name.c_str());
-			kick_player->addWidgetAction("MenuStart", "confirm");
-			kick_player->addWidgetAction("MenuPageRightAlt", "chat");
-			kick_player->addWidgetAction("MenuPageLeftAlt", "privacy");
-			kick_player->setWidgetBack("back_button");
-		    kick_player->setWidgetLeft((std::string("kick_player_") + std::to_string(c + 1)).c_str());
-		    kick_player->setWidgetRight((std::string("kick_player_") + std::to_string(c + 3)).c_str());
-		    kick_player->setWidgetUp((std::string("player_count_") + std::to_string(c + 2)).c_str());
-			if (index != 0) {
-				kick_player->setCallback([](Button&){soundError();});
-			} else {
-				switch (c) {
-				case 0:
-					kick_player->setCallback([](Button&){
-						if (client_disconnected[1]) {
-							soundError();
-							return;
-						}
-						char prompt[1024];
-						snprintf(prompt, sizeof(prompt), Language::get(5403), players[1]->getAccountName());
-						binaryPrompt(prompt, Language::get(5400), Language::get(5401),
-							[](Button&){ // yes
-								soundActivate();
-								closeBinary();
-								kickPlayer(1);
-								},
-							[](Button&){ // no
-								soundCancel();
-								closeBinary();
-								});
-						});
-					break;
-				case 1:
-					kick_player->setCallback([](Button&){
-						if (client_disconnected[2]) {
-							soundError();
-							return;
-						}
-						char prompt[1024];
-						snprintf(prompt, sizeof(prompt), Language::get(5403), players[2]->getAccountName());
-						binaryPrompt(prompt, Language::get(5400), Language::get(5401),
-							[](Button&){ // yes
-								soundActivate();
-								closeBinary();
-								kickPlayer(2);
-								},
-							[](Button&){ // no
-								soundCancel();
-								closeBinary();
-								});
-						});
-					break;
-				case 2:
-					kick_player->setCallback([](Button&){
-						if (client_disconnected[3]) {
-							soundError();
-							return;
-						}
-						char prompt[1024];
-						snprintf(prompt, sizeof(prompt), Language::get(5403), players[3]->getAccountName());
-						binaryPrompt(prompt, Language::get(5400), Language::get(5401),
-							[](Button&){ // yes
-								soundActivate();
-								closeBinary();
-								kickPlayer(3);
-								},
-							[](Button&){ // no
-								soundCancel();
-								closeBinary();
-								});
-						});
-					break;
+			for (int c = 0; c < 3; ++c) {
+				const std::string button_name = std::string("kick_player_") + std::to_string(c + 2);
+				auto kick_player = card->addButton(button_name.c_str());
+				kick_player->setSize(SDL_Rect{ 189 + 33 * c, 353, 30, 30 });
+				kick_player->setFont(smallfont_outline);
+				kick_player->setText(std::to_string(c + 2).c_str());
+				kick_player->setBorder(0);
+				kick_player->setTextColor(uint32ColorWhite);
+				kick_player->setTextHighlightColor(uint32ColorWhite);
+				kick_player->setBackground("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00A.png");
+				kick_player->setBackgroundHighlighted("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00B_Highlighted.png");
+				kick_player->setBackgroundActivated("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00C_Pressed.png");
+				kick_player->setColor(uint32ColorWhite);
+				kick_player->setWidgetSearchParent(name.c_str());
+				kick_player->addWidgetAction("MenuStart", "confirm");
+				kick_player->addWidgetAction("MenuPageRightAlt", "chat");
+				kick_player->addWidgetAction("MenuPageLeftAlt", "privacy");
+				kick_player->setWidgetBack("back_button");
+				kick_player->setWidgetLeft((std::string("kick_player_") + std::to_string(c + 1)).c_str());
+				kick_player->setWidgetRight((std::string("kick_player_") + std::to_string(c + 3)).c_str());
+				kick_player->setWidgetUp((std::string("player_count_") + std::to_string(c + 2)).c_str());
+				if (index != 0) {
+					kick_player->setCallback([](Button&) {soundError(); });
 				}
+				else {
+					switch (c) {
+					case 0:
+						kick_player->setCallback([](Button&) {
+							if (client_disconnected[1]) {
+								soundError();
+								return;
+							}
+							char prompt[1024];
+							snprintf(prompt, sizeof(prompt), Language::get(5403), players[1]->getAccountName());
+							binaryPrompt(prompt, Language::get(5400), Language::get(5401),
+								[](Button&) { // yes
+									soundActivate();
+									closeBinary();
+									kickPlayer(1);
+								},
+								[](Button&) { // no
+									soundCancel();
+									closeBinary();
+								});
+							});
+						break;
+					case 1:
+						kick_player->setCallback([](Button&) {
+							if (client_disconnected[2]) {
+								soundError();
+								return;
+							}
+							char prompt[1024];
+							snprintf(prompt, sizeof(prompt), Language::get(5403), players[2]->getAccountName());
+							binaryPrompt(prompt, Language::get(5400), Language::get(5401),
+								[](Button&) { // yes
+									soundActivate();
+									closeBinary();
+									kickPlayer(2);
+								},
+								[](Button&) { // no
+									soundCancel();
+									closeBinary();
+								});
+							});
+						break;
+					case 2:
+						kick_player->setCallback([](Button&) {
+							if (client_disconnected[3]) {
+								soundError();
+								return;
+							}
+							char prompt[1024];
+							snprintf(prompt, sizeof(prompt), Language::get(5403), players[3]->getAccountName());
+							binaryPrompt(prompt, Language::get(5400), Language::get(5401),
+								[](Button&) { // yes
+									soundActivate();
+									closeBinary();
+									kickPlayer(3);
+								},
+								[](Button&) { // no
+									soundCancel();
+									closeBinary();
+								});
+							});
+						break;
+					
+					}
+				}
+			}
+
+			for (int g = 0; g < 4; ++g) {
+				const std::string button_name2 = std::string("kick_player_") + std::to_string(g + 5);
+				auto kick_player2 = card->addButton(button_name2.c_str());
+				kick_player2->setSize(SDL_Rect{ 156 + 33 * g, 386, 30, 30 });
+				kick_player2->setFont(smallfont_outline);
+				kick_player2->setText(std::to_string(g + 5).c_str());
+				kick_player2->setBorder(0);
+				kick_player2->setTextColor(uint32ColorWhite);
+				kick_player2->setTextHighlightColor(uint32ColorWhite);
+				kick_player2->setBackground("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00A.png");
+				kick_player2->setBackgroundHighlighted("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00B_Highlighted.png");
+				kick_player2->setBackgroundActivated("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00C_Pressed.png");
+				kick_player2->setColor(uint32ColorWhite);
+				kick_player2->setWidgetSearchParent(name.c_str());
+				kick_player2->addWidgetAction("MenuStart", "confirm");
+				kick_player2->addWidgetAction("MenuPageRightAlt", "chat");
+				kick_player2->addWidgetAction("MenuPageLeftAlt", "privacy");
+				kick_player2->setWidgetBack("back_button");
+				kick_player2->setWidgetLeft((std::string("kick_player_") + std::to_string(g + 1)).c_str());
+				kick_player2->setWidgetRight((std::string("kick_player_") + std::to_string(g + 3)).c_str());
+				kick_player2->setWidgetUp((std::string("player_count_") + std::to_string(g + 2)).c_str());
+				if (index != 0) {
+					kick_player2->setCallback([](Button&) {soundError(); });
+				}
+				else {
+					switch (g) {
+					case 0:
+						kick_player2->setCallback([](Button&) {
+							if (client_disconnected[4]) {
+								soundError();
+								return;
+							}
+							char prompt[1024];
+							snprintf(prompt, sizeof(prompt), Language::get(5403), players[4]->getAccountName());
+							binaryPrompt(prompt, Language::get(5400), Language::get(5401),
+								[](Button&) { // yes
+									soundActivate();
+									closeBinary();
+									kickPlayer(4);
+								},
+								[](Button&) { // no
+									soundCancel();
+									closeBinary();
+								});
+							});
+						break;
+					case 1:
+						kick_player2->setCallback([](Button&) {
+							if (client_disconnected[5]) {
+								soundError();
+								return;
+							}
+							char prompt[1024];
+							snprintf(prompt, sizeof(prompt), Language::get(5403), players[5]->getAccountName());
+							binaryPrompt(prompt, Language::get(5400), Language::get(5401),
+								[](Button&) { // yes
+									soundActivate();
+									closeBinary();
+									kickPlayer(5);
+								},
+								[](Button&) { // no
+									soundCancel();
+									closeBinary();
+								});
+							});
+						break;
+					case 2:
+						kick_player2->setCallback([](Button&) {
+							if (client_disconnected[6]) {
+								soundError();
+								return;
+							}
+							char prompt[1024];
+							snprintf(prompt, sizeof(prompt), Language::get(5403), players[6]->getAccountName());
+							binaryPrompt(prompt, Language::get(5400), Language::get(5401),
+								[](Button&) { // yes
+									soundActivate();
+									closeBinary();
+									kickPlayer(6);
+								},
+								[](Button&) { // no
+									soundCancel();
+									closeBinary();
+								});
+							});
+						break;
+					case 3:
+						kick_player2->setCallback([](Button&) {
+							if (client_disconnected[7]) {
+								soundError();
+								return;
+							}
+							char prompt[1024];
+							snprintf(prompt, sizeof(prompt), Language::get(5403), players[7]->getAccountName());
+							binaryPrompt(prompt, Language::get(5400), Language::get(5401),
+								[](Button&) { // yes
+									soundActivate();
+									closeBinary();
+									kickPlayer(7);
+								},
+								[](Button&) { // no
+									soundCancel();
+									closeBinary();
+								});
+							});
+						break;
+					}
 			}
         }
 
         // can't lock slots in local games or saved games
 		if (local || loadingsavegame) {
 			player_count_label->setColor(makeColor(70, 62, 59, 255));
-			for (int c = 0; c < 3; ++c) {
+			for (int c = 0; c < 7; ++c) {
 			    auto player_count = card->findButton((std::string("player_count_") + std::to_string(c + 2)).c_str());
 			    player_count->setBackground("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00D_Gray.png");
 			    player_count->setBackgroundHighlighted("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00D_Gray.png");
@@ -14919,7 +15131,7 @@ failed:
         // can't kick players in local games
 		if (local) {
 			kick_player_label->setColor(makeColor(70, 62, 59, 255));
-			for (int c = 0; c < 3; ++c) {
+			for (int c = 0; c < 7; ++c) {
 			    auto kick_player = card->findButton((std::string("kick_player_") + std::to_string(c + 2)).c_str());
 			    kick_player->setBackground("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00D_Gray.png");
 			    kick_player->setBackgroundHighlighted("*#images/ui/Main Menus/Play/PlayerCreation/LobbySettings/UI_LobbySettings_Button_Tiny00D_Gray.png");
@@ -14939,7 +15151,7 @@ failed:
 
 		bool local = currentLobbyType == LobbyType::LobbyLocal;
 
-		auto card = initCharacterCard(index, 580);
+		auto card = initCharacterCard(index, 625);
         if (!card) {
             return;
         }

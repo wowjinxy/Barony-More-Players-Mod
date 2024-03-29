@@ -22110,6 +22110,9 @@ void CalloutRadialMenu::loadCalloutJSON()
 						entry.pathPlayer3 = basePath + (*itr).value["2"].GetString();
 						entry.pathPlayer4 = basePath + (*itr).value["3"].GetString();
 						entry.pathPlayerX = basePath + (*itr).value["4"].GetString();
+						entry.pathPlayer6 = basePath + (*itr).value["5"].GetString();
+						entry.pathPlayer7 = basePath + (*itr).value["6"].GetString();
+						entry.pathPlayer8 = basePath + (*itr).value["7"].GetString();
 						entry.id = id;
 						CalloutRadialMenu::worldIconIDToEntryKey[id] = key;
 						++id;
@@ -23972,12 +23975,20 @@ std::string& CalloutRadialMenu::WorldIconEntry_t::getPlayerIconPath(const int pl
 		switch ( playernum )
 		{
 		case 0:
-			return pathPlayer3;
+			return pathPlayer8;
 		case 1:
-			return pathPlayer4;
+			return pathPlayer7;
 		case 2:
-			return pathPlayer2;
+			return pathPlayer6;
 		case 3:
+			return pathPlayer5;
+		case 4:
+			return pathPlayer4;
+		case 5:
+			return pathPlayer3;
+		case 6:
+			return pathPlayer2;
+		case 7:
 			return pathPlayerX;
 		default:
 			return pathPlayerX;
@@ -23996,6 +24007,14 @@ std::string& CalloutRadialMenu::WorldIconEntry_t::getPlayerIconPath(const int pl
 			return pathPlayer3;
 		case 3:
 			return pathPlayer4;
+		case 4:
+			return pathPlayer5;
+		case 5:
+			return pathPlayer6;
+		case 6:
+			return pathPlayer7;
+		case 7:
+			return pathPlayer8;
 		default:
 			return pathPlayerX;
 			break;

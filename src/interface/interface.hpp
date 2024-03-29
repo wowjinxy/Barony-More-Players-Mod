@@ -1422,6 +1422,10 @@ struct CalloutRadialMenu
 		std::string pathPlayer2 = "";
 		std::string pathPlayer3 = "";
 		std::string pathPlayer4 = "";
+		std::string pathPlayer5 = "";
+		std::string pathPlayer6 = "";
+		std::string pathPlayer7 = "";
+		std::string pathPlayer8 = "";
 		std::string pathPlayerX = "";
 		int id = 0;
 		std::string& getPlayerIconPath(const int playernum);
